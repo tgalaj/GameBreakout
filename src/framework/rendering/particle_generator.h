@@ -13,8 +13,8 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
-#include "framework/rendering/shader.h"
-#include "framework/rendering/texture.h"
+#include "shader.h"
+#include "texture.h"
 #include "game/game_object.h"
 
 
