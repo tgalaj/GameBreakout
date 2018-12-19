@@ -9,12 +9,12 @@
 #ifndef GAME_H
 #define GAME_H
 #include <vector>
+#include <tuple>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include "game/game_level.h"
-#include "game/ball_object.h"
 
 // Represents the current state of the game
 enum GameState {
@@ -22,6 +22,16 @@ enum GameState {
     GAME_MENU,
     GAME_WIN
 };
+
+// Represents the four possible (collision) directions
+enum Direction {
+    UP,
+    RIGHT,
+    DOWN,
+    LEFT
+};
+// Defines a Collision typedef that represents collision data
+typedef std::tuple<GLboolean, Direction, glm::vec2> Collision; // <collision?, what direction?, difference vector center - closest point>
 
 // Initial size of the player paddle
 const glm::vec2 PLAYER_SIZE(100, 20);
@@ -54,9 +64,9 @@ public:
     void Update(GLfloat dt);
     void Render();
     void DoCollisions();
-
-    GLboolean CheckCollision(GameObject &one, GameObject &two);
-    GLboolean CheckCollision(BallObject &one, GameObject &two);
+    // Reset
+    void ResetLevel();
+    void ResetPlayer();
 };
 
 #endif
