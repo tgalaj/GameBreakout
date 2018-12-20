@@ -8,6 +8,9 @@
 ******************************************************************/
 #include <algorithm>
 
+#include <irrKlang.h>
+using namespace irrklang;
+
 #include "game.h"
 #include "resource_manager.h"
 #include "framework/rendering/sprite_renderer.h"
@@ -15,13 +18,13 @@
 #include "framework/rendering/post_processor.h"
 #include "game/ball_object.h"
 
-
 // Game-related State data
 SpriteRenderer    * Renderer;
 GameObject        * Player;
 BallObject        * Ball;
 ParticleGenerator * Particles;
 PostProcessor     * Effects;
+ISoundEngine      * SoundEngine = createIrrKlangDevice();
 GLfloat             ShakeTime = 0.0f;
 
 Game::Game(GLuint width, GLuint height)
@@ -37,6 +40,7 @@ Game::~Game()
     delete Ball;
     delete Particles;
     delete Effects;
+    SoundEngine->drop();
 }
 
 void Game::Init()
@@ -85,6 +89,8 @@ void Game::Init()
 
     glm::vec2 ballPos = playerPos + glm::vec2(PLAYER_SIZE.x / 2 - BALL_RADIUS, -BALL_RADIUS * 2);
     Ball = new BallObject(ballPos, BALL_RADIUS, INITIAL_BALL_VELOCITY, ResourceManager::GetTexture("face"));
+    // Audio
+    SoundEngine->play2D("res/audio/breakout.mp3", GL_TRUE);
 }
 
 void Game::Update(GLfloat dt)
@@ -336,11 +342,13 @@ void Game::DoCollisions()
                 {
                     box.Destroyed = GL_TRUE;
                     this->SpawnPowerUps(box);
+                    SoundEngine->play2D("res/audio/bleep.mp3", GL_FALSE);
                 }
                 else
                 {   // if block is solid, enable shake effect
                     ShakeTime = 0.05f;
                     Effects->Shake = GL_TRUE;
+                    SoundEngine->play2D("res/audio/solid.wav", GL_FALSE);
                 }
                 // Collision resolution
                 Direction dir = std::get<1>(collision);
@@ -386,6 +394,7 @@ void Game::DoCollisions()
                 ActivatePowerUp(powerUp);
                 powerUp.Destroyed = GL_TRUE;
                 powerUp.Activated = GL_TRUE;
+                SoundEngine->play2D("res/audio/powerup.wav", GL_FALSE);
             }
         }
     }
@@ -405,10 +414,12 @@ void Game::DoCollisions()
         //Ball->Velocity.y = -Ball->Velocity.y;
         Ball->Velocity = glm::normalize(Ball->Velocity) * glm::length(oldVelocity); // Keep speed consistent over both axes (multiply by length of old velocity, so total strength is not changed)
         // Fix sticky paddle
-        Ball->Velocity.y = -1 * std::abs(Ball->Velocity.y);
+        Ball->Velocity.y = -1 * abs(Ball->Velocity.y);
 
         // If Sticky powerup is activated, also stick ball to paddle once new velocity vectors were calculated
         Ball->Stuck = Ball->Sticky;
+
+        SoundEngine->play2D("res/audio/bleep.wav", GL_FALSE);
     }
 }
 

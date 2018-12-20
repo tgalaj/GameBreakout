@@ -2,6 +2,9 @@
 find_package(OpenGL REQUIRED)
 set(OPENGL_LIBRARY ${OPENGL_LIBRARIES})
 
+# irrKlang
+find_package(Irrklang REQUIRED)
+
 # glfw
 find_library(GLFW_LIBRARY "glfw" "/usr/lib" "/usr/local/lib")
 find_path(GLFW_INCLUDE_DIR "glfw/glfw.h" "/usr/include" "/usr/local/include")
