@@ -20,6 +20,7 @@ target_include_directories(${SAMPLE_NAME} PRIVATE ${Breakout_SOURCE_DIR}/src)
 
 # Define the link libraries
 target_include_directories(${PROJECT_NAME} PUBLIC "${IRRKLANG_INCLUDE_DIR}")
+target_include_directories(${PROJECT_NAME} PUBLIC "${FREETYPE_INCLUDE_DIR}")
 target_include_directories(${PROJECT_NAME} PUBLIC "${GLFW_INCLUDE_DIR}")
 target_include_directories(${PROJECT_NAME} PUBLIC "${GLAD_INCLUDE_DIR}")
 target_include_directories(${PROJECT_NAME} PUBLIC "${GLM_INCLUDE_DIR}")
@@ -28,6 +29,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${STB_IMAGE_INCLUDE_DIR}")
 
 target_link_libraries(${PROJECT_NAME} "${OPENGL_LIBRARY}")
 target_link_libraries(${PROJECT_NAME} "${IRRKLANG_LIBRARY}")
+target_link_libraries(${PROJECT_NAME} "${FREETYPE_LIBRARY}")
 target_link_libraries(${PROJECT_NAME} "${GLFW_LIBRARY}")
 target_link_libraries(${PROJECT_NAME} "${GLAD_LIBRARY}"      "${CMAKE_DL_LIBS}")
 target_link_libraries(${PROJECT_NAME} "${IMGUI_LIBRARY}"     "${CMAKE_DL_LIBS}")

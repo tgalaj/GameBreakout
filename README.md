@@ -20,4 +20,14 @@ or (for SSH)
 git clone --recursive git@github.com:Shot511/GameBreakout.git
 ```
 
+# Build the code
+To build the code run the following commands in the root directory of the downloaded repo:
+
+```
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+
 

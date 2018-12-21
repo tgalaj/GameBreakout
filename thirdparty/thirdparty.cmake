@@ -5,6 +5,17 @@ set(OPENGL_LIBRARY ${OPENGL_LIBRARIES})
 # irrKlang
 find_package(Irrklang REQUIRED)
 
+# freetype2
+set(FREETYPE_DIR "${THIRDPARTY_DIR}/freetype2")
+
+add_subdirectory("${FREETYPE_DIR}")
+
+set(FREETYPE_LIBRARY "freetype")
+set(FREETYPE_INCLUDE_DIR "${FREETYPE_DIR}/include")
+
+MESSAGE(STATUS "FREETYPE_LIBRARY = ${FREETYPE_LIBRARY}")
+MESSAGE(STATUS "FREETYPE_INCLUDE_DIR = ${FREETYPE_INCLUDE_DIR}")
+
 # glfw
 find_library(GLFW_LIBRARY "glfw" "/usr/lib" "/usr/local/lib")
 find_path(GLFW_INCLUDE_DIR "glfw/glfw.h" "/usr/include" "/usr/local/include")
