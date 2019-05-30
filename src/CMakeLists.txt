@@ -44,16 +44,25 @@ add_custom_command(TARGET  ${SAMPLE_NAME} POST_BUILD
 						   ${CMAKE_CURRENT_BINARY_DIR}/res)
 						   
 if(WIN32)
-	if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-		add_custom_command(TARGET  ${SAMPLE_NAME} PRE_BUILD
-				           COMMAND ${CMAKE_COMMAND} -E copy_directory
-				           ${CMAKE_SOURCE_DIR}/thirdparty/irrKlang-1.6.0/bin/win32-visualStudio
-				           ${CMAKE_CURRENT_BINARY_DIR})
-	elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-		add_custom_command(TARGET  ${SAMPLE_NAME} PRE_BUILD
-				           COMMAND ${CMAKE_COMMAND} -E copy_directory
-				           ${CMAKE_SOURCE_DIR}/thirdparty/irrKlang-1.6.0/bin/win32-gcc
-				           ${CMAKE_CURRENT_BINARY_DIR})
+	if(CMAKE_CL_64)
+		if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+			add_custom_command(TARGET  ${SAMPLE_NAME} PRE_BUILD
+							   COMMAND ${CMAKE_COMMAND} -E copy_directory
+							   ${CMAKE_SOURCE_DIR}/thirdparty/irrKlang-64bit-1.6.0/bin/winx64-visualStudio
+							   ${CMAKE_CURRENT_BINARY_DIR})
+		endif()
+	else()
+		if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+			add_custom_command(TARGET  ${SAMPLE_NAME} PRE_BUILD
+							   COMMAND ${CMAKE_COMMAND} -E copy_directory
+							   ${CMAKE_SOURCE_DIR}/thirdparty/irrKlang-1.6.0/bin/win32-visualStudio
+							   ${CMAKE_CURRENT_BINARY_DIR})
+		elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+			add_custom_command(TARGET  ${SAMPLE_NAME} PRE_BUILD
+							   COMMAND ${CMAKE_COMMAND} -E copy_directory
+							   ${CMAKE_SOURCE_DIR}/thirdparty/irrKlang-1.6.0/bin/win32-gcc
+							   ${CMAKE_CURRENT_BINARY_DIR})
+		endif()
 	endif()
 endif(WIN32)
 
