@@ -23,10 +23,6 @@ find_path(GLFW_INCLUDE_DIR "glfw/glfw.h" "/usr/include" "/usr/local/include")
 if((NOT GLFW_LIBRARY) OR (NOT GLFW_INCLUDE_DIR))
 	set(GLFW_DIR "${THIRDPARTY_DIR}/glfw")
 
-	message("Unable to find glfw, cloning...")
-    execute_process(COMMAND git submodule update --init ${GLFW_DIR}
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-
 	set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "Build the GLFW example programs")
 	set(GLFW_BUILD_TESTS    OFF CACHE INTERNAL "Build the GLFW test programs")
 	set(GLFW_BUILD_DOCS     OFF CACHE INTERNAL "Build the GLFW documentation")
