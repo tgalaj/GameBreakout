@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/Shot511/GameBreakout.svg?branch=master)](https://travis-ci.com/Shot511/GameBreakout)
+[![Build Status](https://github.com/Shot511/GameBreakout/actions/workflows/cpp_cmake.yml/badge.svg)](https://github.com/Shot511/GameBreakout/actions)
 
 # GameBreakout
 Implementation of Breakout game based on [LearnOpenGL.com tutorial series](https://learnopengl.com/In-Practice/2D-Game/Breakout).
