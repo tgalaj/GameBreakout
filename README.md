@@ -11,13 +11,13 @@ Here's the snapshot of the finished game:
 To clone the repo use the following command:
 
 ```
-git clone --recursive https://github.com/Shot511/GameBreakout.git
+git clone --recursive https://github.com/tgalaj/GameBreakout.git
 ```
 
 or (for SSH)
 
 ```
-git clone --recursive git@github.com:Shot511/GameBreakout.git
+git clone --recursive git@github.com:tgalaj/GameBreakout.git
 ```
 
 # Build the code
